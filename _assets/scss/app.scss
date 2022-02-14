@@ -1,0 +1,739 @@
+/* ==== COMPILE =====
+sass --watch wedding-2/short/_assets/scss/app.scss:wedding-2/short/_assets/css/app.min.css --style compressed
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rochester&display=swap');
+$colors: (
+    'primary'       : #3A4E3F,
+    'primary-500'   : #678170,
+    'secondary'     : #BCB683,
+    'light'         : #BCB683,
+    'danger'        : #957777,
+    'gray'          : #908F89,
+    'gray-800'      : #B7BDB9,
+    'dark'          : #122617,
+    'dark-500'      : #848986,
+    'white'         : #FFFFFF,
+    'black'         : #000000,
+);
+$breakpoints: (
+    'sm'        : 576px,
+    'md'        : 768px,
+    'lg'        : 992px,
+    'xl'        : 1200px,
+    'xxl'        : 1400px,
+);
+$loop-breakpoints: map-remove($breakpoints, 'xxl');
+
+$font-type-secondary: 'Rochester', cursive;
+@function color($value) { @return map-get($colors, $value); }
+@function breakpoint($value) { @return map-get($breakpoints, $value); }
+
+// RESET
+html,:root {
+    font-size: 10px;
+    scroll-behavior: smooth;
+    @media screen and (max-width: breakpoint('sm')) {
+        font-size: 9px;
+    }
+}
+html,body {
+    max-width: 100vw;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: map-get($colors, 'dark');
+}
+h1,h2,h3,h4,h5,h6 { font-weight: normal; }
+h1 { 
+    font-size: 7.2rem; 
+    @media screen and (max-width: breakpoint('md')) { font-size: 5.4rem; }
+}
+h2 { 
+    font-size: 4.8rem; 
+    @media screen and (max-width: breakpoint('md')) { font-size: 3.2rem; }
+}
+h3 { font-size: 4.2rem; }
+h4 { font-size: 3.6rem; }
+h5 { font-size: 2.4rem; }
+h6 { 
+    font-size: 1.8rem; 
+    @media screen and (max-width: breakpoint('md')) { font-size: 1.6rem !important; }
+}
+p { font-size: 1.4rem; }
+.text-lg { 
+    font-size: 1.8rem; 
+    @media screen and (max-width: breakpoint('md')) { font-size: 1.4rem !important; }
+}
+.text-md { font-size: 1.6rem; }
+.text-sm { font-size: 1.2rem; }
+.text-xs { font-size: 1rem; }
+
+
+body {
+    background-color: color('white');
+    background-image: 
+        url('../img/decoration/section-texture.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    color: color('black');
+    background-attachment: fixed;
+    transition: all .3s ease-in;
+    &.opening-show {
+        min-height: 100vh;
+        max-height: 100vh;
+        overflow: hidden;
+    } 
+    &.opening-hide {
+        min-height: 100vh;
+        max-height: unset;
+        section#opening {
+            animation: opening-hide 1.5s ease-out forwards;
+        }
+    }
+}
+
+section#opening {
+    padding: 8rem 0;
+    position: fixed;
+    right: 0; left: 0; top: 0; bottom: 0;
+    z-index: 9999;
+    color: color('primary');
+    background-color: color('white');
+    background-image: 
+        url('../img/decoration/section-texture.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    .container { z-index: 2; position: relative; }
+    .img-wrapper-spouse {
+        font-size: 4.5px;
+        @media screen and (min-width: breakpoint('md')) { font-size: 6px; }
+        @media screen and (min-width: breakpoint('lg')) { font-size: 9px; }
+    }
+    .decoration { 
+        position: fixed; 
+        font-size: 5px;
+        z-index: 1;
+        @media screen and (min-width: breakpoint('sm')) { font-size: 7px; }
+        @media screen and (min-width: breakpoint('lg')) { font-size: 10px; }
+        &#opening-decoration-1 {
+            top: 0; left: 0; 
+            width: 25em;
+        }
+        &#opening-decoration-2 {
+            top: 0; right: 0;
+            width: 25em;
+        }
+        &#opening-decoration-3 {
+            bottom: 0;
+            width: 50em;
+        }
+    }
+}
+
+section#section-1 {
+    position: relative;
+    padding: 8rem 0;
+    background-color: transparent;
+    @media screen and (min-width: breakpoint('lg')) { padding: 10rem 0; }
+    .container { z-index: 2; position: relative; }
+    .decoration { 
+        position: absolute; 
+        font-size: 5px;
+        z-index: 1;
+        @media screen and (min-width: breakpoint('sm')) { font-size: 7px; }
+        @media screen and (min-width: breakpoint('lg')) { font-size: 10px; }
+        &#opening-decoration-1 {
+            top: 0; left: 0; 
+            width: 25em;
+        }
+        &#opening-decoration-2 {
+            bottom: 0; right: 0;
+            width: 25em;
+        }
+    }
+}
+
+section#section-2 {
+    padding: 8rem 0;
+    background-color: transparent;
+    @media screen and (min-width: breakpoint('lg')) { padding: 10rem 0; }
+    #section-2-card-message {
+        .card-body { 
+            overflow-x: hidden; 
+            overflow-y: auto;
+            max-height: 90vh; 
+        }
+        @media screen and (min-width: breakpoint('lg')) { .card-body { max-height: 717px; } }
+    }
+}
+
+section#section-3 {
+    position: relative;
+    padding: 8rem 0;
+    min-height: 100vh;
+    .container-xxl {  z-index: 2; position: relative; }
+    .decoration { 
+        position: absolute; 
+        font-size: 5px;
+        z-index: 1;
+        @media screen and (min-width: breakpoint('sm')) { font-size: 7px; }
+        @media screen and (min-width: breakpoint('lg')) { font-size: 10px; }
+        &#section-3-decoration-1 {
+            top: 0; left: 0; 
+            width: 25em;
+        }
+        &#section-3-decoration-2 {
+            bottom: 0; right: 0;
+            width: 25em;
+        }
+    }
+}
+
+section#section-4 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 0;
+    min-height: 100vh;
+    @media screen and (min-width: breakpoint('lg')) { padding: 10rem 0; }
+    .container {  z-index: 2; position: relative; }
+    .decoration { 
+        position: absolute; 
+        font-size: 5px;
+        z-index: 1;
+        @media screen and (min-width: breakpoint('sm')) { font-size: 7px; }
+        @media screen and (min-width: breakpoint('lg')) { font-size: 10px; }
+        &#section-4-decoration-1 {
+            top: -5%; left: 0;
+            width: 25em;
+            @media screen and (min-width: breakpoint('md')) { top: unset; }
+        }
+        &#section-4-decoration-2 {
+            bottom: -5%; right: 0;
+            width: 25em;
+            @media screen and (min-width: breakpoint('md')) { bottom: unset; }
+        }
+    }
+}
+
+// COMPONENTS
+// override
+.container {
+    @media screen and (max-width: breakpoint('md')) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+.btn {
+    border-radius: .5rem;
+    outline: unset !important;
+    font-size: 1.8rem;
+    padding: 1.6rem 3.2rem;
+    transition: all .3s ease-in;
+    &.btn-primary {
+        background-color: map-get($colors, 'primary') !important;
+        border: unset !important;
+        &:hover {
+            box-shadow: 0 10px 30px rgba(color('primary'), .3);
+        }
+    }
+}
+.form-label {
+    font-size: 1.6rem;
+    color: color('dark');
+    font-weight: 300;
+}
+.form-check {
+    display: flex;
+    align-items: center;
+    .form-check-input {
+        width: 3rem; height: 3rem;
+        border: 0;
+        background-color: #F5F5F5;
+        margin-right: 1.6rem;
+        &:checked {
+            background-color: color('primary');
+            border-color: color('primary');
+            box-shadow: 0 0 1px rgba(color('primary'), .4);
+        }
+    }
+    .form-check-label {
+        font-size: 1.6rem;
+        color: color('dark');
+        font-weight: 300;
+        cursor: pointer;
+    }
+}
+.form-control {
+    padding: 1.45rem 2rem;
+    font-size: 1.8rem;
+    border: 0;
+    background-color: #F5F5F5;
+    transition: all .3s ease-in;
+    &.form-control-sm {
+        padding: 1.2rem 1.8rem;
+        font-size: 1.6rem;
+    }
+    &.is-invalid, &.is-valid {
+        background-image: unset;
+    }
+    &.is-valid { border-color: color('primary');}
+    &.is-invalid { border-color: color('danger');}
+    &:focus, &:active {
+        outline: unset !important;
+        box-shadow: unset !important;
+        border: 1px solid #949494;
+    }
+    &::placeholder {
+        font-weight: 300;
+        color: #949494;
+    }
+}
+.form-select {
+    padding: 1.7rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    &.form-select-sm {
+        padding: 1.2rem 1.8rem !important;
+        font-size: 1.6rem !important;
+    }
+    &.is-invalid, &.is-valid {
+        background-image: unset;
+    }
+    &.is-valid { border-color: color('primary');}
+    &.is-invalid { border-color: color('danger');}
+    &:focus, &:active {
+        outline: unset !important;
+        box-shadow: unset !important;
+        border: 1px solid color('dark');
+    }
+}
+.valid-feedback {color: color('primary');}
+.invalid-feedback {color: color('danger');}
+.carousel.carousel-fade {
+    .carousel-inner {
+        .carousel-item, &.carousel-item.active {
+            transition: all 1s ease-in-out !important;
+        }
+    }
+}
+
+
+// custom
+.btn-group {
+    &.btn-group-action {
+        position: fixed;
+        left: 0; right: 0;
+        z-index: 9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        bottom: 3rem;
+        border-radius: 15px;
+        // @media screen and (max-width: breakpoint('lg')) {
+        //     justify-content: flex-end;
+        // }
+        .btn-group-action-container {
+            background-color: color('white');
+            padding: 2rem !important;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(color('black'), .1);
+        }
+        .btn {
+            &.btn-action {
+                flex: unset;
+                font-size: 1.6rem !important;
+                margin: 0 .5rem;
+                padding: 1.4rem 1.6rem;
+                color: color('white');
+                opacity: .6;
+                &:focus {opacity: 1;}
+            }
+            &.active {
+                background-color: darken(color('primary'), 10%) !important;
+            }
+            &:hover {
+                background-color: darken(color('primary'), 10%) !important;
+            }
+        }
+    }
+}
+.btn {
+    &#btn-play {
+        position: fixed;
+        top: 2rem; right: 2rem;
+    }
+    &#btn-to-top {
+        position: fixed;
+        bottom: 8rem; right: 2rem;
+        display: none;
+        animation: pop-out .3s linear forwards;
+    }
+    &.btn-light {
+        border: unset;
+        width: 5rem !important; height: 5rem !important;
+        padding: unset;
+        display: flex; 
+        align-items: center; justify-content: center;
+        border-radius: 50%;
+        z-index: 999;
+        box-shadow: unset !important;
+        background-color: rgba(color('black'), .8);
+        &.active {
+            i { color: color('primary');}
+        }
+        &:focus {
+            box-shadow: unset;
+        }
+        i { color: color('white') }
+    }
+}
+.img-wrapper {
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.img-wrapper-spouse {
+    font-size: 10px;
+    width: 30em; height: 30em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &::after {
+        content: '';
+        display: block;
+        width: 30em; height: 30em;
+        position: absolute;
+        top: 1.6em; left: -1em;
+        background-image: url('../img/decoration/img-wrapper-spouse.png');
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .img-wrapper {
+        width: 20em;
+        height: 20em;
+        border-radius: 50%;
+    }
+}
+.text-bordered {
+    border-top: 2px solid #C4C4C4;
+    border-bottom: 2px solid #C4C4C4;
+    padding: .8rem 2rem;
+}
+
+// UTILITY
+.font-type-secondary { font-family: $font-type-secondary; }
+
+.text-white { color: color('white') !important; }
+.text-primary { color: color('primary') !important; }
+.text-primary-500 { color: color('primary-500') !important; }
+.text-dark { color: color('dark') !important; }
+.text-dark-500 { color: color('dark-500') !important; }
+
+.text-spacing-default { 
+    letter-spacing: 0.6rem; 
+    @media screen and (max-width: breakpoint('md')) {
+        letter-spacing: 0.4rem; 
+    }
+}
+
+.font-light {font-weight: 300;}
+.font-normal {font-weight: 400;}
+.font-semibold {font-weight: 600;}
+.font-bold {font-weight: 700;}
+.font-extrabold {font-weight: 800;}
+.font-boldest {font-weight: 900;}
+
+// background
+.bg-primary {background-color: color('primary') !important;}
+.bg-primary-500 {background-color: color('primary-500') !important;}
+.bg-transparent {background-color: #FBFBFB !important;}
+
+// misc
+.csr-pointer {cursor: pointer;}
+
+$spacing-props: (
+    margin: m, 
+    margin-left: ml, 
+    margin-right: mr, 
+    margin-top: mt, 
+    margin-bottom: mb, 
+    (margin-left, margin-right): mx,
+    (margin-top, margin-bottom): my,
+    padding: p, 
+    padding-left: pl, 
+    padding-right: pr, 
+    padding-top: pt, 
+    padding-bottom: pb, 
+    (padding-left, padding-right): px,
+    (padding-top, padding-bottom): py,
+);
+@for $i from 0 to 11 {
+    @each $prop-name, $prop-abb in $spacing-props {
+        .#{$prop-abb}-#{$i} {
+            @each $pn in $prop-name {
+                #{$pn}: ($i * 1) * .5rem !important;
+            }
+        }
+    }
+}
+@for $i from 0 to 11 {
+    @each $prop-name, $prop-abb in $spacing-props {
+        @each $breakpoint-name, $breakpoint-value in $loop-breakpoints {
+            .#{$prop-abb}-#{$breakpoint-name}-#{$i} {
+                @media screen and (min-width: $breakpoint-value) {
+                    @each $pn in $prop-name {
+                        #{$pn}: ($i * 1) * .5rem !important;
+                    }
+                }
+            }
+        }
+    }
+}
+.py-lg-12 { 
+    @media screen and (min-width: breakpoint('lg')) {
+        padding-top: 6rem !important; padding-bottom: 6rem !important;
+    }
+}
+.mb-12 { margin-bottom: 6rem; }
+.mb-lg-12 {
+    @media screen and (min-width: breakpoint('lg')) {
+        margin-bottom: 12rem !important;
+    }
+}
+.mb-16 { margin-bottom: 8rem; }
+.mb-sm-16 {
+    @media screen and (min-width: breakpoint('sm')) {
+        margin-bottom: 8rem !important;
+    }
+}
+.mb-lg-16 {
+    @media screen and (min-width: breakpoint('lg')) {
+        margin-bottom: 8rem !important;
+    }
+}
+.mb-lg-50 {
+    @media screen and (min-width: breakpoint('lg')) {
+        margin-bottom: 25rem !important;
+    }
+}
+// SIZING
+// loop to max size in base.scss
+$sizing-props: (
+    width: w, 
+    height: h,
+);
+// UNIT SIZE (0, REM)
+@for $i from 0 to (101) {
+    @each $prop-name, $prop-abb in $sizing-props {
+        // IF 0 : w-0 (no w-0rem)
+        @if ($i == 0) {
+            .#{$prop-abb}-#{$i} { #{$prop-name}: $i !important; }
+        } @else {
+            .#{$prop-abb}-#{$i}rem { #{$prop-name}: $i * 1rem !important; }
+        }
+    }
+}
+// UNIT SIZE (0, REM) RESPONSIVE
+@for $i from 0 to (101) {
+    @each $prop-name, $prop-abb in $sizing-props {
+        @each $breakpoint-name, $breakpoint-value in $loop-breakpoints {
+            // IF 0 : w-lg-0 (not w-lg-0rem)
+            @if ($i == 0) {
+                .#{$prop-abb}-#{$breakpoint-name}-#{$i} { 
+                    @media screen and (min-width: $breakpoint-value) {
+                        #{$prop-name}: $i !important; 
+                    }
+                }
+            } @else {
+                .#{$prop-abb}-#{$breakpoint-name}-#{$i}rem { 
+                    @media screen and (min-width: $breakpoint-value) {
+                        #{$prop-name}: $i * 1rem !important; 
+                    }
+                }
+            }
+        }
+    }
+}
+// PERCENTAGE SIZE
+@for $i from 25 to 101 {
+    @if ($i % 25 == 0) {
+        @each $prop-name, $prop-abb in $sizing-props {
+            .#{$prop-abb}-#{$i} { #{$prop-name}: $i * 1%; }
+            @each $breakpoint-name, $breakpoint-value in $loop-breakpoints {
+                @media screen and (min-width: $breakpoint-value) {
+                    .#{$prop-abb}-#{$breakpoint-name}-#{$i} { #{$prop-name}: $i * 1% !important; }
+                }
+            }
+        }
+    }
+}
+
+// OBJECT
+.obj-fit {
+    overflow: hidden;
+    &.obj-fit-cover {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    &.obj-fit-contain {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    &.obj-fit-fill {
+        img, video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+
+// vendors custom
+// lightgallery
+#row-lightgallery {
+    [data-src] {
+        transition: all .4s ease-in;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.02);
+        }
+    }
+}
+// glide
+// obj-fit obj-fit-cover w-100 h-lg-50rem rounded-3
+.glide-gallery-preview {
+    width: 100%;
+    height: 32rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    @media screen and (min-width: breakpoint('md')) { height: 40rem; }
+    @media screen and (min-width: breakpoint('lg')) { height: 50rem; }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        opacity: 0;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background-color: black;
+        z-index: 2;
+    }
+    &.active {
+        box-shadow: -10px 10px 64px 0px #678070B2;
+        &::before {
+            animation: glide-gallery-preview .8s ease-in forwards;
+        }
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.row-glide-nav {
+    @media screen and (max-width: breakpoint('md')) {
+        position: absolute;
+        top: -18rem;
+        left: 0; right: 0;
+        z-index: 3;
+        .btn {
+            padding: unset;
+            width: 4rem; height: 4rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            background-color: rgba(color('white'), .1) !important;
+            color: color('dark');
+        }
+    }
+}
+.glide-gallery {
+    .glide__slide--active {
+        .glide-gallery-slide {
+            transform: scale(1.1);
+        }
+    }
+    .glide-gallery-slide {
+        height: 8rem;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        transition: transform .5s ease-in;
+        @media screen and (min-width: breakpoint('sm')) { height: 16rem; }
+        @media screen and (min-width: breakpoint('md')) { height: 28rem; border-radius: 25px; }
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-color: rgba(color('black'), .4);
+            z-index: 2;
+        }
+        img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+@keyframes opening-hide {
+    0% {
+        opacity: 1;
+    }  100% {
+        opacity: 0;
+    }
+}
+@keyframes pop-out {
+    0% {
+        transform: scale(1);
+    } 50% {
+        transform: scale(1.1);
+    } 100% {
+        transform: scale(1);
+    }
+}
+@keyframes glide-gallery-preview {
+    0% {
+        opacity: .8;
+    } 100% {
+        opacity: 0;
+    }
+}
+
